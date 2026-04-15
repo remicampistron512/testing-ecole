@@ -20,3 +20,28 @@ def test_str_output_without_teacher():
 
     assert str(course) == expected
 
+def test_str_output_with_teacher():
+    course = Course(
+        name="Maths",
+        start_date=date(2025, 9, 1),
+        end_date=date(2026, 6, 30)
+    )
+    teacher = FakeTeacher("Mme Dupont")
+    course.set_teacher(teacher)
+
+    expected = "Maths (2025-09-01 – 2026-06-30),\nenseigné par Mme Dupont"
+
+    assert str(course) == expected
+
+
+def test_course_creation():
+    course = Course(
+        name="Maths",
+        start_date=date(2025, 9, 1),
+        end_date=date(2026, 6, 30)
+    )
+    assert course.name == "Maths"
+    assert course.start_date == date(2025, 9, 1)
+    assert course.end_date == date(2026, 6, 30)
+    assert course.teacher is None
+    assert course.students_taking_it == []
