@@ -11,6 +11,14 @@ class FakeTeacher:
     def __str__(self):
         return self.name
 
+class FakeStudent:
+    def __init__(self, name="Alice"):
+        self.name = name
+        self.courses_taken = []
+
+    def __str__(self):
+        return self.name
+
 
 def test_str_output_without_teacher():
     course = Course(
@@ -49,6 +57,7 @@ def test_course_creation():
     assert course.teacher is None
     assert course.students_taking_it == []
 
+
 def test_adding_same_teacher_should_not_duplicate_course():
     course = Course(
         name="Maths",
@@ -60,3 +69,18 @@ def test_adding_same_teacher_should_not_duplicate_course():
     course.set_teacher(teacher)
     assert course.teacher == teacher
     assert teacher.courses_teached.count(course) == 1
+
+
+def test_add_student_should_add_student_to_course_and_course_to_student():
+    course = Course(
+        name="Maths",
+        start_date=date(2025, 9, 1),
+        end_date=date(2026, 6, 30)
+    )
+    student = FakeStudent("Alice")
+
+    course.add_student(student)
+
+    assert len(course.students_taking_it) == 1
+    assert student in course.students_taking_it
+    assert course in student.courses_taken
