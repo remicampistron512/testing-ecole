@@ -48,3 +48,15 @@ def test_course_creation():
     assert course.end_date == date(2026, 6, 30)
     assert course.teacher is None
     assert course.students_taking_it == []
+
+def test_adding_same_teacher_should_not_duplicate_course():
+    course = Course(
+        name="Maths",
+        start_date=date(2025, 9, 1),
+        end_date=date(2026, 6, 30)
+    )
+    teacher = FakeTeacher("Mme Dupont")
+    assert course.set_teacher(teacher)
+    assert course.set_teacher(teacher)
+    assert course.teacher == teacher
+    assert teacher.courses_teached.count(course) == 1
