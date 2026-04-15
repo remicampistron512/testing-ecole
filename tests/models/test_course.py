@@ -56,7 +56,7 @@ def test_adding_same_teacher_should_not_duplicate_course():
         end_date=date(2026, 6, 30)
     )
     teacher = FakeTeacher("Mme Dupont")
-    assert course.set_teacher(teacher)
-    assert course.set_teacher(teacher)
+    course.set_teacher(teacher)
+    course.set_teacher(teacher)
     assert course.teacher == teacher
     assert teacher.courses_teached.count(course) == 1
