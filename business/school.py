@@ -95,7 +95,6 @@ class School:
         marie   = Teacher('Marie', 'Curie', 31, date(2023, 9, 4))
         william = Teacher('William', 'Shakespeare', 34, date(2023, 9, 4))
         michel  = Teacher('Michel', 'Platini', 42, date(2023, 9, 4))
-        bob     = Teacher("Bob", 'Bobby',45, date(2023, 9, 4))
 
         # ajout de ceux-ci à l'école
         for teacher in [victor, jules, sophie, marie, william, michel]:
