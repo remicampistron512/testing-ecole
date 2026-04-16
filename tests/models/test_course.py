@@ -14,7 +14,7 @@ class FakeTeacher:
 class FakeStudent:
     def __init__(self, name="Alice"):
         self.name = name
-        self.courses_taken = []
+        self.courses_taken = ["Physique"]
 
     def __str__(self):
         return self.name
@@ -84,3 +84,19 @@ def test_add_student_should_add_student_to_course_and_course_to_student():
     assert len(course.students_taking_it) == 1
     assert student in course.students_taking_it
     assert course in student.courses_taken
+
+def test_adding_another_teacher_should_remove_course_from_taught_courses():
+    course = Course(
+        name="Maths",
+        start_date=date(2025, 9, 1),
+        end_date=date(2026, 6, 30)
+    )
+
+    teacher = FakeTeacher("Mme Dupont")
+    teacher2 = FakeTeacher("Mr Dupuis")
+    course.set_teacher(teacher)
+    course.set_teacher(teacher2)
+
+    assert len(teacher.courses_teached) == 0
+    assert len(teacher2.courses_teached) == 1
+
