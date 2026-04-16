@@ -2,6 +2,8 @@ from datetime import date
 
 from business.school import School
 from models.course import Course
+from models.student import Student
+from models.teacher import Teacher
 
 
 def test_add_course_should_add_a_course():
@@ -13,3 +15,16 @@ def test_add_course_should_add_a_course():
     )
     school.add_course(course)
     assert course in school.courses
+
+
+def test_add_teacher_should_add_a_teacher():
+    school = School()
+    teacher = Teacher(
+        first_name="Sophie",
+        last_name="Turner",
+        age=42,
+        hiring_date=date(2025, 9, 1)
+    )
+    school.add_teacher(teacher)
+    assert teacher in school.teachers
+
