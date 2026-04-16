@@ -18,3 +18,12 @@ def test_person_output_for_str():
     sut.address = Address("78,rue du Treuilh","TARTAS",40400)
     assert sut.__str__() == "Rémi Campistron (43 ans), 78,rue du Treuilh, 40400 TARTAS"
 
+
+def test_person_properties_are_correctly_stored():
+    first_name = "Rémi"
+    last_name = "Campistron"
+    age = 43
+    sut = Person(first_name, last_name, age)
+    assert sut.first_name == first_name
+    assert sut.last_name == last_name
+    assert sut.age == age
