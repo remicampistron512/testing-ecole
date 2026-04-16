@@ -28,3 +28,11 @@ def test_add_teacher_should_add_a_teacher():
     school.add_teacher(teacher)
     assert teacher in school.teachers
 
+
+def test_add_student_should_add_a_student():
+    school = School()
+    student = Student("Rémi", "Campistron", 43)
+
+    school.add_student(student)
+    assert student in school.students
+
