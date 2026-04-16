@@ -30,3 +30,9 @@ def test_student_should_be_added_to_student_taking_it():
     )
     student.add_course(course)
     assert student in course.students_taking_it
+
+
+def test_str_should_output_student_number():
+    student = Student("Rémi", "Campistron", 43)
+    assert student.__str__() == "Rémi Campistron (43 ans), n° étudiant : 1"
+
