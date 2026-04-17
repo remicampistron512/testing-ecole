@@ -1,4 +1,5 @@
 from datetime import date
+from unittest.mock import patch
 
 from business.school import School
 from models.course import Course

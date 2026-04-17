@@ -1,6 +1,7 @@
 from datetime import date
 
 from models.course import Course
+from models.student import Student
 
 
 class FakeTeacher:
@@ -10,6 +11,7 @@ class FakeTeacher:
 
     def __str__(self):
         return self.name
+
 
 class FakeStudent:
     def __init__(self, name="Alice"):
@@ -85,6 +87,7 @@ def test_add_student_should_add_student_to_course_and_course_to_student():
     assert student in course.students_taking_it
     assert course in student.courses_taken
 
+
 def test_adding_another_teacher_should_remove_course_from_taught_courses():
     course = Course(
         name="Maths",
@@ -99,4 +102,46 @@ def test_adding_another_teacher_should_remove_course_from_taught_courses():
 
     assert len(teacher.courses_teached) == 0
     assert len(teacher2.courses_teached) == 1
+
+
+def test_add_student(mocker):
+    course = Course(
+        name="chimie",
+        start_date=date(2025, 9, 1),
+        end_date=date(2026, 6, 30)
+    )
+
+    student = Student(
+        first_name="Rémi",
+        last_name="Campistron",
+        age=43
+    )
+
+    # Mock de la liste des cours enseignés par l'enseignant pour isoler le test
+    mocker.patch.object(student, 'courses_taken', [])
+
+    course.add_student(student)
+
+    assert student in course.students_taking_it
+    assert course in student.courses_taken
+
+
+def test_add_student_with_mocker(mocker):
+    course = Course(
+        name="chimie",
+        start_date=date(2025, 9, 1),
+        end_date=date(2026, 6, 30)
+    )
+
+    student = Student(
+        first_name="Rémi",
+        last_name="Campistron",
+        age=43
+    )
+
+    mock_list = mocker.patch.object(student, 'courses_taken', autospec=True)
+    course.add_student(student)
+    assert student in course.students_taking_it
+
+    mock_list.append.assert_called_once_with(course)
 

@@ -21,7 +21,7 @@ def test_course_should_be_added_to_courses_taken():
     assert len(student.courses_taken) == 1
 
 
-def test_student_should_be_added_to_student_taking_it():
+def test_student_should_be_added_to_students_taking_it():
     student = Student("Rémi", "Campistron", 43)
     course = Course(
         name="Physique",
